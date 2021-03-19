@@ -6,7 +6,6 @@ use App\Repository\RestaurantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-
 use Symfony\Component\Routing\Annotation\Route;
 
 class RestaurantController extends AbstractController
@@ -76,9 +75,8 @@ class RestaurantController extends AbstractController
     }
     /**
      * @Route("/restaurant/delete/{id}")
-     * @Method({"DELETE"})
      */
-    public function delete(Request $request, $id) {
+    public function delete($id) {
 
         //find the object to delete
         $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find($id);
@@ -87,5 +85,14 @@ class RestaurantController extends AbstractController
         $this->restaurantRepository->deleterestaurant($restaurant);
         return $this->render("restaurant/index.html.twig");
     }
-
+    /**
+     * @Route("/restaurant//{id}")
+     */
+    public function showRestaurant($id) {
+        //find the object to show
+        $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find($id);
+        return $this->render("restaurant/index.html.twig",[
+            'restaurant'=> $restaurant
+            ]);
+    }
 }

@@ -4,14 +4,25 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
+use Doctrine\ORM\EntityManager;
+use Doctrine\Persistence\ObjectManager;
+use Psr\Log\LoggerInterface;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20210318143718 extends AbstractMigration
 {
+    private $entitymanager;
+    public function __construct(Connection $connection,ObjectManager $entitymanager,LoggerInterface $logger)
+    {
+        parent::__construct($connection,$logger);
+        $this->entitymanager=$entitymanager;
+    }
+
     public function getDescription() : string
     {
         return '';
@@ -20,10 +31,16 @@ final class Version20210318143718 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-
-        foreach (explode(';', file_get_contents(__DIR__ . '/scripts/script.sql')) as $sql) {
+        /*
+        foreach (explode(';', file_get_contents(__DIR__ .'../../scripts/script.sql')) as $sql) {
             $this->addSql($sql);
-        }
+        }*/
+
+        $sql = 'INSERT INTO `city` (`name`, `zipcode`) VALUES
+                (\'marrakech\', \'1245\',);';
+
+        $this->entitymanager->getConnection()->exec($sql);
+        $this->entitymanager->flush();
     }
 
     public function down(Schema $schema) : void

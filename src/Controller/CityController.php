@@ -7,7 +7,7 @@ use App\Repository\CityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-//use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 class CityController extends AbstractController
 {
@@ -74,9 +74,8 @@ class CityController extends AbstractController
     }
     /**
      * @Route("/city/delete/{id}")
-     * @Method({"DELETE"})
      */
-    public function delete(Request $request, $id) {
+    public function delete($id) {
 
         //find the object to delete
         $city = $this->getDoctrine()->getRepository(City::class)->find($id);

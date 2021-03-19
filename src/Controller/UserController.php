@@ -71,9 +71,8 @@ class UserController extends AbstractController
     }
     /**
      * @Route("/user/delete/{id}")
-     * @Method({"DELETE"})
      */
-    public function delete(Request $request, $id) {
+    public function delete($id) {
 
         //find the object to delete
         $user = $this->getDoctrine()->getRepository(User::class)->find($id);

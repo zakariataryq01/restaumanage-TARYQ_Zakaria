@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Restaurant;
 use App\Entity\RestaurantPicture;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,32 +20,21 @@ class RestaurantPictureRepository extends ServiceEntityRepository
         parent::__construct($registry, RestaurantPicture::class);
     }
 
-    // /**
-    //  * @return RestaurantPicture[] Returns an array of RestaurantPicture objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function  addrestaurantpicture($restaurantpicture)
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $entityManager = $this->getEntityManager();
+        $entityManager->persist($restaurantpicture);
+        $entityManager->flush();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?RestaurantPicture
+    public function  editrestaurantpicture($restaurantpicture)
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $entityManager = $this->getEntityManager();
+        $entityManager->flush();
     }
-    */
+    public function deleterestaurantpicture($restaurantpicture)
+    {
+        $entityManager = $this->getEntityManager();
+        $entityManager->remove($restaurantpicture);
+        $entityManager->flush();
+    }
 }

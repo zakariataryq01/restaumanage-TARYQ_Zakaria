@@ -1,1 +1,1 @@
-insert into  city values (1,'marrakech','code 1242');
+INSERT INTO city (name, zipcode) VALUES("marrakech", "code 1242");

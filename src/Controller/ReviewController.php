@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Restaurant;
 use App\Entity\Review;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,9 +73,8 @@ class ReviewController extends AbstractController
     }
     /**
      * @Route("/review/delete/{id}")
-     * @Method({"DELETE"})
      */
-    public function delete(Request $request, $id) {
+    public function delete($id) {
 
         //find the object to delete
         $review = $this->getDoctrine()->getRepository(Review::class)->find($id);

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello restaurant!{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+
+    <div class="example-wrapper">
+        <h1>AJouter un nouveau restaurant</h1>
+        <form method="post" action="{{ path('addrestaurant') }}">
+            <div class="form-group">
+                <label for="race">name</label>
+                <input type="text" class="form-control" name="name"  placeholder="Entrer le nom  " required>
+            </div>
+            <div class="form-group">
+                <label for="nom">description</label>
+                <input type="text" class="form-control" name="description"  placeholder="Entrer la description" required>
+            </div>
+            <div class="form-group">
+                <label for="alergies">city</label>
+                <input type="text" class="form-control" name="city_id"  placeholder="city" required>
+            </div>
+            <select class="form-control" name="city" required>
+                {% for city in cities %}
+                <option value="{{ city.id }}">{{ city.name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <input type="button" class="btn btn-default" value="Cancel" onclick="location.href('/restaurant');">
+        </form>
+
+    </div>
+{% endblock %}

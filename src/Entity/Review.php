@@ -33,12 +33,12 @@ class Review
     private $created_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="reviews")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="reviews")
      */
     private $user_id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=restaurant::class, inversedBy="reviews")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Restaurant", inversedBy="reviews")
      */
     private $restaurant_id;
 

@@ -13,7 +13,7 @@ class RestaurantpictureController extends AbstractController
     private $restaurantpictureRepository;
     function __construct(RestaurantPictureRepository $restaurantpictureRepository)
     {
-        $this->$restaurantpictureRepository=$restaurantpictureRepository;
+        $this->restaurantpictureRepository=$restaurantpictureRepository;
     }
 
     /**

@@ -2,18 +2,25 @@
 
 namespace App\Controller;
 use App\Entity\Restaurant;
+use App\Repository\CityRepository;
 use App\Repository\RestaurantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class RestaurantController extends AbstractController
 {
     private $restaurantRepository;
-    function __construct(RestaurantRepository $restaurantRepository)
+    private $cityRepository;
+    private $session;
+    function __construct(RestaurantRepository $restaurantRepository,CityRepository $cityRepository ,SessionInterface $session)
     {
-        $this->$restaurantRepository=$restaurantRepository;
+        $this->restaurantRepository=$restaurantRepository;
+        $this->cityRepository=$cityRepository;
+        $this->session=$session;
     }
 
     /**
@@ -25,7 +32,7 @@ class RestaurantController extends AbstractController
         return $this->render('restaurant/index.html.twig', array('restaurants' => $restaurants));
     }
     /**
-    * @Route("/addrestaurant", name="add_restaurant", methods={"GET","POST"})
+    * @Route("/addrestaurant", name="addrestaurant", methods={"GET","POST"})
     */
     public function addRestaurant(Request $request): Response
     {
@@ -35,15 +42,25 @@ class RestaurantController extends AbstractController
             $restaurant=new Restaurant();
             $restaurant->setDescription($request->get('description'));
             $restaurant->setName($request->get('name'));
-            $restaurant->setCityId($request->get('city'));
+            $restaurant->setCityId($this->cityRepository->find($request->get('city')));
 
+            $restaurant->setCreateAt(new \DateTime());
             // persist object into database
             $this->restaurantRepository->addrestaurant($restaurant);
 
-            return $this->render("restaurant/index.html.twig");
-        }else{
+            // add alert success
+            $this->session->getFlashBag()->add(
+                'success',
+                'your abject has been added with success !'
+            );
+            //redirect to index
+            return $this->redirectToRoute('restaurant');
 
-            return $this->render("restaurant/form-restaurant.html.twig");
+        }else{
+            $cities=$this->cityRepository->findAll();
+            return $this->render("restaurant/form-restaurant.html.twig",[
+                'cities'=>$cities
+            ]);
         }
 
     }

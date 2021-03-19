@@ -23,7 +23,7 @@ class RestaurantPicture
     private $filename;
 
     /**
-     * @ORM\ManyToOne(targetEntity=restaurant::class, inversedBy="restaurantPictures")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Restaurant", inversedBy="restaurantPictures")
      */
     private $restaurant_id;
 

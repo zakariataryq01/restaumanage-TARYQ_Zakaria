@@ -30,7 +30,7 @@ class User
     private $password;
 
     /**
-     * @ORM\ManyToOne(targetEntity=city::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity="App\Entity\City", inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
      */
     private $city_id;

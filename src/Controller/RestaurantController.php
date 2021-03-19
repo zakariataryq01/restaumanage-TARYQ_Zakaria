@@ -65,7 +65,7 @@ class RestaurantController extends AbstractController
 
     }
     /**
-     * @Route("/editrestaurant/{id}", name="edit_restaurant", methods={"GET","POST"})
+     * @Route("/editrestaurant/{id}", name="editrestaurant", methods={"GET","POST"})
      */
     public function editRestaurant(Request $request,$id): Response
     {
@@ -78,20 +78,30 @@ class RestaurantController extends AbstractController
             // get data from form
             $restaurant->setDescription($request->get('description'));
             $restaurant->setName($request->get('name'));
-            $restaurant->setCityId($request->get('city'));
+            $restaurant->setCityId($this->cityRepository->find($request->get('city')));
 
             // persist object into database
             $this->restaurantRepository->editrestaurant($restaurant);
 
-            return $this->render("restaurant/index.html.twig");
+            // add alert success
+            $this->session->getFlashBag()->add(
+                'success',
+                'your abject has been updated with success !'
+            );
+            //redirect to index
+            return $this->redirectToRoute('restaurant');
         }else{
-
-            return $this->render("restaurant/form-editrestaurant.html.twig");
+            $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find($id);
+            $cities=$this->cityRepository->findAll();
+            return $this->render("restaurant/form-editrestaurant.html.twig",[
+                'restaurant'=>$restaurant,
+                'cities'=>$cities
+            ]);
         }
 
     }
     /**
-     * @Route("/restaurant/delete/{id}")
+     * @Route("/deleterestaurant/{id}")
      */
     public function delete($id) {
 
@@ -100,7 +110,14 @@ class RestaurantController extends AbstractController
 
         // delete object
         $this->restaurantRepository->deleterestaurant($restaurant);
-        return $this->render("restaurant/index.html.twig");
+
+        // add alert success
+        $this->session->getFlashBag()->add(
+            'success',
+            'your abject has been deleted with success !'
+        );
+        //redirect to index
+        return $this->redirectToRoute('restaurant');
     }
     /**
      * @Route("/restaurant//{id}")

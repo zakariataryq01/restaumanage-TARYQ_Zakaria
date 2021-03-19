@@ -28,7 +28,7 @@
                         <div class="col-sm-6">
                             <a href="/addrestaurant" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>ajouter restaurant</span></a>
                             <a href="#" onclick="return confirm('are u sure to delete all  animals?')" class="btn btn-danger"><i class="material-icons">&#xE15C;</i> <span>supprimer All</span></a>
-                            <a onclick="" class="btn btn-danger"><i class="material-icons">&#xE15C;</i> <span>supprimer checkbox</span></a>
+
                         </div>
                     </div>
                 </div>
@@ -61,8 +61,8 @@
                             <td>{{ restaurant.description }}</td>
                             <td>{{ restaurant.getCreateAt()| date }}</td>
                             <td>
-                                <a href="restaurant\edit\" class="edit" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="restaurant\delete\" onclick="return confirm('are u sure to delete the animal?')" class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                <a href="editrestaurant\{{ restaurant.id }}" class="edit" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="deleterestaurant\{{ restaurant.id }}" onclick="return confirm('are u sure to delete the animal?')" class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
                         </tr>
 

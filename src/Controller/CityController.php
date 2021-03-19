@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\City;
+use App\Repository\CityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,6 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CityController extends AbstractController
 {
+    private $cityRepository;
+    function __construct(CityRepository $cityRepository)
+    {
+        $this->cityRepository=$cityRepository;
+    }
+
     /**
      * @Route("/city", name="city")
      */
@@ -31,9 +38,7 @@ class CityController extends AbstractController
             $city->setZipcode($request->get('zipcode'));
 
             // persist object into database
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($city);
-            $entityManager->flush();
+            $this->cityRepository->addcity($city);
 
             return $this->render("city/index.html.twig");
         }else{
@@ -58,8 +63,7 @@ class CityController extends AbstractController
             $city->setZipcode($request->get('zipcode'));
 
             // persist object into database
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->flush();
+            $this->cityRepository->editcity($city);
 
             return $this->render("city/index.html.twig");
         }else{
@@ -78,9 +82,8 @@ class CityController extends AbstractController
         $city = $this->getDoctrine()->getRepository(City::class)->find($id);
 
         // delete object
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($city);
-        $entityManager->flush();
+        $this->cityRepository->deletecity($city);
+
         return $this->render("city/index.html.twig");
     }
 

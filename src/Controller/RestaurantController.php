@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 use App\Entity\Restaurant;
+use App\Repository\RestaurantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,6 +11,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RestaurantController extends AbstractController
 {
+    private $restaurantRepository;
+    function __construct(RestaurantRepository $restaurantRepository)
+    {
+        $this->$restaurantRepository=$restaurantRepository;
+    }
+
     /**
      * @Route("/restaurant", name="restaurant")
      */
@@ -32,9 +39,7 @@ class RestaurantController extends AbstractController
             $restaurant->setCityId($request->get('city'));
 
             // persist object into database
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($restaurant);
-            $entityManager->flush();
+            $this->restaurantRepository->addrestaurant($restaurant);
 
             return $this->render("restaurant/index.html.twig");
         }else{
@@ -60,8 +65,7 @@ class RestaurantController extends AbstractController
             $restaurant->setCityId($request->get('city'));
 
             // persist object into database
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->flush();
+            $this->restaurantRepository->editrestaurant($restaurant);
 
             return $this->render("restaurant/index.html.twig");
         }else{
@@ -80,9 +84,7 @@ class RestaurantController extends AbstractController
         $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find($id);
 
         // delete object
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($restaurant);
-        $entityManager->flush();
+        $this->restaurantRepository->deleterestaurant($restaurant);
         return $this->render("restaurant/index.html.twig");
     }
 

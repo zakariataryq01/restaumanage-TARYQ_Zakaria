@@ -18,7 +18,23 @@ class RestaurantRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Restaurant::class);
     }
-
+    public function  addrestaurant($restaurant)
+    {
+        $entityManager = $this->getEntityManager();
+        $entityManager->persist($restaurant);
+        $entityManager->flush();
+    }
+    public function  editrestaurant($restaurant)
+    {
+        $entityManager = $this->getEntityManager();
+        $entityManager->flush();
+    }
+    public function deleterestaurant($restaurant)
+    {
+        $entityManager = $this->getEntityManager();
+        $entityManager->remove($restaurant);
+        $entityManager->flush();
+    }
     // /**
     //  * @return Restaurant[] Returns an array of Restaurant objects
     //  */

@@ -21,6 +21,9 @@ final class Version20210318143718 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
 
+        foreach (explode(';', file_get_contents(__DIR__ . '/scripts/script.sql')) as $sql) {
+            $this->addSql($sql);
+        }
     }
 
     public function down(Schema $schema) : void

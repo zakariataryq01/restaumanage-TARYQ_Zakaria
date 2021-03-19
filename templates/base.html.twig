@@ -250,6 +250,176 @@
         </style>
     </head>
     <body>
-        {% block body %}{% endblock %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">DashBord</a>
+            <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarTogglerDemo02"
+                    aria-controls="navbarTogglerDemo02"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+            >
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Gestion des Restaus</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
+                        >contact</a
+                        >
+                    </li>
+                </ul>
+                <form class="d-flex input-group w-auto">
+                    <input
+                            type="search"
+                            class="form-control"
+                            placeholder="taper quelque chose"
+                            aria-label="Search"
+                    />
+                    <button
+                            class="btn btn-outline-primary"
+                            type="button"
+                            data-mdb-ripple-color="dark"
+                    >
+                        Chercher
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="container-xl">
+    {% block body %}{% endblock %}
+    </div>
+
+    <footer class="text-center text-white" style="background-color: #caced1;">
+        <!-- Grid container -->
+        <div class="container p-4">
+            <!-- Section: Images -->
+            <section class="">
+                <div class="row">
+                    <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+                        <div
+                                class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                data-ripple-color="light"
+                        >
+                            <img
+                                    src="https://mdbootstrap.com/img/new/fluid/city/113.jpg"
+                                    class="w-100"
+                            />
+                            <a href="#!">
+                                <div
+                                        class="mask"
+                                        style="background-color: rgba(251, 251, 251, 0.2);"
+                                ></div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+                        <div
+                                class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                data-ripple-color="light"
+                        >
+                            <img
+                                    src="https://mdbootstrap.com/img/new/fluid/city/111.jpg"
+                                    class="w-100"
+                            />
+                            <a href="#!">
+                                <div
+                                        class="mask"
+                                        style="background-color: rgba(251, 251, 251, 0.2);"
+                                ></div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+                        <div
+                                class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                data-ripple-color="light"
+                        >
+                            <img
+                                    src="https://mdbootstrap.com/img/new/fluid/city/112.jpg"
+                                    class="w-100"
+                            />
+                            <a href="#!">
+                                <div
+                                        class="mask"
+                                        style="background-color: rgba(251, 251, 251, 0.2);"
+                                ></div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+                        <div
+                                class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                data-ripple-color="light"
+                        >
+                            <img
+                                    src="https://mdbootstrap.com/img/new/fluid/city/114.jpg"
+                                    class="w-100"
+                            />
+                            <a href="#!">
+                                <div
+                                        class="mask"
+                                        style="background-color: rgba(251, 251, 251, 0.2);"
+                                ></div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+                        <div
+                                class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                data-ripple-color="light"
+                        >
+                            <img
+                                    src="https://mdbootstrap.com/img/new/fluid/city/115.jpg"
+                                    class="w-100"
+                            />
+                            <a href="#!">
+                                <div
+                                        class="mask"
+                                        style="background-color: rgba(251, 251, 251, 0.2);"
+                                ></div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+                        <div
+                                class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                data-ripple-color="light"
+                        >
+                            <img
+                                    src="https://mdbootstrap.com/img/new/fluid/city/116.jpg"
+                                    class="w-100"
+                            />
+                            <a href="#!">
+                                <div
+                                        class="mask"
+                                        style="background-color: rgba(251, 251, 251, 0.2);"
+                                ></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Section: Images -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2020 Copyright:
+            <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
     </body>
 </html>

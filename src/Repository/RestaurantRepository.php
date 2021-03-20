@@ -3,6 +3,7 @@
 namespace App\Repository;
 use App\Entity\Restaurant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -45,7 +46,37 @@ class RestaurantRepository extends ServiceEntityRepository
     public function AvgNoteRestaurant($id)
     {
         $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery("SELECT avg(rv.rating) FROM App\Entity\Review rv ");
+        $query = $entityManager->createQuery("SELECT AVG(rv.rating) as moyenne FROM App\Entity\Review rv where rv.restaurant_id=".$id);
         return $query->getResult();
+    }
+    public function topThreeRestaurants()
+    {
+        $sql = " SELECT r.id ,r.name , r.description , r.create_at ,avg(rv.rating) as moyenne 
+             FROM restaurant r INNER join review rv where rv.restaurant_id_id=r.id  GROUP BY r.id ORDER By moyenne asc limit 3";
+        $stmt = $this->getEntityManager()->getConnection()->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+    public function listRestautsWithDetails($id)
+    {
+        $sql = "SELECT r.id ,r.name , r.description , r.create_at,rv.user_id_id,rv.rating,rv.message,u.usrname
+             FROM restaurant r INNER join review rv on rv.restaurant_id_id=r.id 
+            INNER JOIN user u on rv.user_id_id=u.id where r.id=".$id
+            ;
+        $stmt = $this->getEntityManager()->getConnection()->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function classRestaurantsByVot()
+    {
+        $sql = " SELECT r.id ,r.name , r.description , r.create_at ,avg(rv.rating) as moyenne 
+             FROM restaurant r INNER join review rv where rv.restaurant_id_id=r.id  GROUP BY r.id ORDER By moyenne asc";
+        $stmt = $this->getEntityManager()->getConnection()->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
     }
 }

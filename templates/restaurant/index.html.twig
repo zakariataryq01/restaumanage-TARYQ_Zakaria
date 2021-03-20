@@ -59,6 +59,7 @@
                             <td>{{ restaurant.description }}</td>
                             <td>{{ restaurant.getCreateAt()| date }}</td>
                             <td>
+                                <a href="show\{{ restaurant.id }}" class="show-for-large">Show</a>
                                 <a href="editrestaurant\{{ restaurant.id }}" class="edit" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                 <a href="deleterestaurant\{{ restaurant.id }}" onclick="return confirm('are u sure to delete the animal?')" class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>

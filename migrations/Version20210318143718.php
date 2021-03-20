@@ -8,7 +8,6 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 use Doctrine\ORM\EntityManager;
-use Doctrine\Persistence\ObjectManager;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -17,10 +16,9 @@ use Psr\Log\LoggerInterface;
 final class Version20210318143718 extends AbstractMigration
 {
     private $entitymanager;
-    public function __construct(Connection $connection,ObjectManager $entitymanager,LoggerInterface $logger)
+    public function __construct(Connection $connection,LoggerInterface $logger)
     {
         parent::__construct($connection,$logger);
-        $this->entitymanager=$entitymanager;
     }
 
     public function getDescription() : string
@@ -35,12 +33,7 @@ final class Version20210318143718 extends AbstractMigration
         foreach (explode(';', file_get_contents(__DIR__ .'../../scripts/script.sql')) as $sql) {
             $this->addSql($sql);
         }*/
-
-        $sql = 'INSERT INTO `city` (`name`, `zipcode`) VALUES
-                (\'marrakech\', \'1245\',);';
-
-        $this->entitymanager->getConnection()->exec($sql);
-        $this->entitymanager->flush();
+        $this->entitymanager->getConnection()->executeQuery("INSERT INTO city (name, zipcode) VALUES('ttrrr', 'code 12')");
     }
 
     public function down(Schema $schema) : void

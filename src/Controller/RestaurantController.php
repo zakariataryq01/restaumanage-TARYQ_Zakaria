@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+use App\Entity\City;
 use App\Entity\Restaurant;
 use App\Repository\CityRepository;
 use App\Repository\RestaurantRepository;
@@ -120,27 +121,42 @@ class RestaurantController extends AbstractController
         return $this->redirectToRoute('restaurant');
     }
     /**
-     * @Route("/restaurant//{id}")
+     * @Route("/show/{id}")
      */
-    public function showRestaurant($id) {
+    public function showRestaurant($id)
+    {
+        $reviews=$this->restaurantRepository->listRestautsWithDetails($id);
         //find the object to show
         $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find($id);
-        return $this->render("restaurant/index.html.twig",[
-            'restaurant'=> $restaurant
-            ]);
-    }
+        $city=$this->getDoctrine()->getRepository(City::class)->find($restaurant->getCityId());
 
+        return $this->render("restaurant/showRestaurant.html.twig",[
+            'restaurant'=> $restaurant,
+            'reviews'=>$reviews,
+            'city'=>$city
+            ]);
+      }
     /**
      * @Route("/requestdql", name="requestdql")
      */
     public function viewDQL(): Response
     {
+
+        $reviews=$this->restaurantRepository->listRestautsWithDetails(7);
+        //find the object to show
+        $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find(7);
+        $city=$this->getDoctrine()->getRepository(City::class)->find($restaurant->getCityId());
+
         $restaus=$this->restaurantRepository->listnewRestaurant();
         $valMoy=$this->restaurantRepository->AvgNoteRestaurant(7);
-        var_dump($valMoy);
+        $topThreeRestaurants=$this->restaurantRepository->topThreeRestaurants();
         return $this->render('restaurant/requestsDql-view.html.twig',[
             'restaurants'=>$restaus,
-            'valeurMoyenne'=>$valMoy
+            'valeurMoyenne'=>$valMoy,
+            'topThreeRestaurants'=>$topThreeRestaurants,
+            'reviews'=>$reviews,
+            'restaurant'=>$restaurant,
+            'city'=>$city
         ]);
     }
 }

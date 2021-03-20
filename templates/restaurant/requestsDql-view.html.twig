@@ -7,16 +7,13 @@
         .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
         .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
     </style>
-        <div class="container">
             <h1> Requetes DQL </h1>
             <div class="row">
-                <div class="col-sm-6">
-                       <div class="table-responsive">
-                          <div class="table-wrapper">
+                <div class="col-sm-8">
+                    <div>
                             <div class="table-title">
                                         <h2>liste <b>des 6 nouveaux restaurants</b></h2>
                                 </div>
-                            </div>
                             <table class="table table-striped table-hover">
                                 <thead>
                                 <tr>
@@ -49,35 +46,104 @@
                                 {% endfor %}
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-                <div class="col-sm-6">
-                    <div class="table-wrapper">
+                </div>
+                </div>
+                <div class="col-sm-4">
+
                         <div class="table-title">
-                            <h2>Moyenne de note du restaurant : <b> restau1</b></h2>
+                            <h2>Moyenne de note du restaurant : <b> {{ restaurant.name }}</b></h2>
                         </div>
-                    </div>
+
                     {% for valM in valeurMoyenne %}
-                    <p>{{ valM }}</p>
+                    <h1>{{ valM.moyenne }}</h1>
                     {% endfor %}
+                    <div class="table-title">
+                        <h2>liste <b>des Top 3  restaurants</b></h2>
+                    </div>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>
+							<span class="custom-checkbox">
+								<input type="checkbox" id="selectAll">
+								<label for="selectAll"></label>
+							</span>
+                            </th>
+                            <th>Nom</th>
+                            <th>description</th>
+                            <th>created at </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for restaurant in topThreeRestaurants %}
+                            <tr>
+                                <td>
+                                        <span class="custom-checkbox">
+                                            <input type="checkbox" id="checkbox1" name="checkbox" value="">
+                                            <label for="checkbox1"></label>
+                                        </span>
+                                </td>
+                                <td>{{ restaurant.name }}</td>
+                                <td>{{ restaurant.description }}</td>
+                                <td>{{ restaurant.create_at| date }}</td>
+                            </tr>
+
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </div>
 
         <div class="row">
-            <div class="col-sm-6">
-                request 2
-            </div>
-            <div class="col-sm-6">
-                request 2
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6">
-                request 2
-            </div>
-            <div class="col-sm-6">
-                request 2
+            <div id="invoice" class="col-sm-12">
+                <div class="table-title">
+                    <h2>details du restaurant : {{ restaurant.name }}<b></b></h2>
+                </div>
+                <div class="invoice overflow-auto">
+
+                    <div style="min-width: 600px">
+
+                        <main>
+                            <div class="row contacts">
+                                <div class="col invoice-to">
+                                    <div class="text-gray-light">Nom du Restaurant:</div>
+                                    <h2 class="to">{{ restaurant.name }}</h2>
+                                    <div class="address">{{ city.name }}, Maroc</div>
+                                </div>
+                                <div class="col invoice-details">
+                                    <h1 class="invoice-id">Date de creation</h1>
+                                    <div class="date">Date : {{ restaurant.getCreateAt | date }}</div>
+                                </div>
+                            </div>
+                            <table border="0" cellspacing="0" cellpadding="0">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th class="text-left">Reviews</th>
+                                    <th class="text-right">Rating</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for rev in reviews %}
+                                    <tr>
+                                        <td class="no">{{ rev.user_id_id }}</td>
+                                        <td class="text-left"><h3>
+                                                <a target="_blank" href="#">
+                                                    {{ rev.usrname }}
+                                                </a>
+                                            </h3>
+                                            {{ rev.message }}
+                                        </td>
+                                        <td class="unit">{{ rev.rating }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+
+                            </table>
+                        </main>
+                    </div>
+                </div>
             </div>
         </div>
 {% endblock %}

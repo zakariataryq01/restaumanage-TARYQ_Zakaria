@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% block title %}restaurant!{% endblock %}
+{% block body %}
+
+    <!--Author      : @arboshiki-->
+    <div id="invoice">
+
+        <div class="invoice overflow-auto">
+            <div style="min-width: 600px">
+
+                <main>
+                    <div class="row contacts">
+                        <div class="col invoice-to">
+                            <div class="text-gray-light">Nom du Restaurant:</div>
+                            <h2 class="to">{{ restaurant.name }}</h2>
+                            <div class="address">{{ city.name }}, Maroc</div>
+                        </div>
+                        <div class="col invoice-details">
+                            <h1 class="invoice-id">Date de creation</h1>
+                            <div class="date">Date : {{ restaurant.getCreateAt | date }}</div>
+                        </div>
+                    </div>
+                    <table border="0" cellspacing="0" cellpadding="0">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th class="text-left">Reviews</th>
+                            <th class="text-right">Rating</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for rev in reviews %}
+                        <tr>
+                            <td class="no">{{ rev.user_id_id }}</td>
+                            <td class="text-left"><h3>
+                                    <a target="_blank" href="#">
+                                        {{ rev.usrname }}
+                                    </a>
+                                </h3>
+                                {{ rev.message }}
+                            </td>
+                            <td class="unit">{{ rev.rating }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+
+                    </table>
+                </main>
+            </div>
+        </div>
+    </div>
+{% endblock %}

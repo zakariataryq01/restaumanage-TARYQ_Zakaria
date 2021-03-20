@@ -33,7 +33,7 @@ final class Version20210318143718 extends AbstractMigration
         foreach (explode(';', file_get_contents(__DIR__ .'../../scripts/script.sql')) as $sql) {
             $this->addSql($sql);
         }*/
-        $this->entitymanager->getConnection()->executeQuery("INSERT INTO city (name, zipcode) VALUES('ttrrr', 'code 12')");
+       // $this->entitymanager->getConnection()->executeQuery("INSERT INTO city (name, zipcode) VALUES('ttrrr', 'code 12')");
     }
 
     public function down(Schema $schema) : void

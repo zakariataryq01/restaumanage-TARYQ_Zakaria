@@ -1,2 +1,1 @@
-INSERT INTO city (name, zipcode) VALUES('tt', 'code 1242');
-INSERT INTO city (name, zipcode) VALUES('ttrrr', 'code 12');
+INSERT INTO restau_db.user (id, usrname, password, city_id_id) VALUES (4, 'tar', '134', 6);

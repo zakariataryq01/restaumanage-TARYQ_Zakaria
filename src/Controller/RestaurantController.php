@@ -5,7 +5,11 @@ use App\Entity\City;
 use App\Entity\Restaurant;
 use App\Repository\CityRepository;
 use App\Repository\RestaurantRepository;
+use Doctrine\DBAL\Types\TextType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Test\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionBagInterface;
@@ -19,11 +23,23 @@ class RestaurantController extends AbstractController
     private $session;
     function __construct(RestaurantRepository $restaurantRepository,CityRepository $cityRepository ,SessionInterface $session)
     {
+
         $this->restaurantRepository=$restaurantRepository;
         $this->cityRepository=$cityRepository;
         $this->session=$session;
     }
-
+/*
+    /
+    public function buildForm(FormBuilderInterface $builder, array $options)
+        {
+            $builder
+                ->add('name', TextType::class)
+                ->add('description', TextareaType::class)
+                ->add('city_id', TextType::class)
+                ->add('enregistrer', SubmitType::class)
+            ;
+        }
+*/
     /**
      * @Route("/restaurant", name="restaurant")
      */
@@ -57,7 +73,7 @@ class RestaurantController extends AbstractController
             //redirect to index
             return $this->redirectToRoute('restaurant');
 
-        }else{
+        }else {
             $cities=$this->cityRepository->findAll();
             return $this->render("restaurant/form-restaurant.html.twig",[
                 'cities'=>$cities

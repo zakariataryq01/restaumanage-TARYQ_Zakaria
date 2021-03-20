@@ -129,4 +129,18 @@ class RestaurantController extends AbstractController
             'restaurant'=> $restaurant
             ]);
     }
+
+    /**
+     * @Route("/requestdql", name="requestdql")
+     */
+    public function viewDQL(): Response
+    {
+        $restaus=$this->restaurantRepository->listnewRestaurant();
+        $valMoy=$this->restaurantRepository->AvgNoteRestaurant(7);
+        var_dump($valMoy);
+        return $this->render('restaurant/requestsDql-view.html.twig',[
+            'restaurants'=>$restaus,
+            'valeurMoyenne'=>$valMoy
+        ]);
+    }
 }

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Repository;
-
 use App\Entity\Restaurant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -35,32 +34,18 @@ class RestaurantRepository extends ServiceEntityRepository
         $entityManager->remove($restaurant);
         $entityManager->flush();
     }
-    // /**
-    //  * @return Restaurant[] Returns an array of Restaurant objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function listnewRestaurant()
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery("SELECT r FROM App\Entity\Restaurant r order By r.create_at Desc ")
+            ->setMaxResults(6);
+        return $query->getResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Restaurant
+    public function AvgNoteRestaurant($id)
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery("SELECT avg(rv.rating) FROM App\Entity\Review rv ");
+        return $query->getResult();
     }
-    */
 }

@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello restaurant!{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+        <div class="container">
+            <h1> Requetes DQL </h1>
+            <div class="row">
+                <div class="col-sm-6">
+                       <div class="table-responsive">
+                          <div class="table-wrapper">
+                            <div class="table-title">
+                                        <h2>liste <b>des 6 nouveaux restaurants</b></h2>
+                                </div>
+                            </div>
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th>
+							<span class="custom-checkbox">
+								<input type="checkbox" id="selectAll">
+								<label for="selectAll"></label>
+							</span>
+                                    </th>
+                                    <th>Nom</th>
+                                    <th>description</th>
+                                    <th>created at </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for restaurant in restaurants %}
+                                    <tr>
+                                        <td>
+                                        <span class="custom-checkbox">
+                                            <input type="checkbox" id="checkbox1" name="checkbox" value="">
+                                            <label for="checkbox1"></label>
+                                        </span>
+                                        </td>
+                                        <td>{{ restaurant.name }}</td>
+                                        <td>{{ restaurant.description }}</td>
+                                        <td>{{ restaurant.getCreateAt()| date }}</td>
+                                    </tr>
+
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                <div class="col-sm-6">
+                    <div class="table-wrapper">
+                        <div class="table-title">
+                            <h2>Moyenne de note du restaurant : <b> restau1</b></h2>
+                        </div>
+                    </div>
+                    {% for valM in valeurMoyenne %}
+                    <p>{{ valM }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                request 2
+            </div>
+            <div class="col-sm-6">
+                request 2
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                request 2
+            </div>
+            <div class="col-sm-6">
+                request 2
+            </div>
+        </div>
+{% endblock %}
